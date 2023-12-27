@@ -1,0 +1,52 @@
+﻿<Window x:Class="Lab_5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab_5"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Grid ShowGridLines="False">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="800"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="350"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ToolBar Width="Auto" >
+            <Button Content="Добавить" FontSize="10" Margin="5,0,5,0" Click="Add_Click" Height="Auto" Width="Auto" HorizontalAlignment="Center" IsDefault="True" IsCancel="True"/>
+            <Separator/>
+            <Button Content="Изменить" FontSize="10" Margin="5,0,5,0" Click="Edit_Click"  Height="Auto" Width="Auto"/>
+            <Separator/>
+            <Button Content="Удалить" FontSize="10" Margin="5,0,5,0" Click="Delete_Click" Height="Auto" Width="Auto" />
+            <Separator/>
+        </ToolBar>
+
+        <ListView x:Name="songsList" ItemsSource="{Binding}" Grid.Row="1" Background="#FFE6E6E6" SelectionChanged="songsList_SelectionChanged" Margin="0,0,0,5">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Singer" Width="100" DisplayMemberBinding="{Binding Singer}"/>
+                    <GridViewColumn Header="Song" Width="100" DisplayMemberBinding="{Binding SongTitle}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+        <WrapPanel Grid.Row="2">
+            <Button Margin="10 0 10 0" Click="Show_Click">Filters</Button>
+            <WrapPanel x:Name="filtersPanel" Visibility="Collapsed" >
+                <RadioButton GroupName="Filters" IsChecked="True" Name="Singer_Check" Width="Auto" Margin=" 0 0 10 0" VerticalAlignment="Center">Singer</RadioButton>
+                <RadioButton GroupName="Filters" Name="Song_Check" Width="Auto" Margin=" 0 0 10 0" VerticalAlignment="Center">Song</RadioButton>
+                <TextBox Width="150" Name="txtFilter"/>
+                <Button Width="60" Margin="10 0 0 0" Click="Find_Click">Найти</Button>
+            </WrapPanel>
+        </WrapPanel>
+
+    </Grid>
+</Window>
